@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="Content/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+    <table id="grid"></table>
+    <div id="pager"></div>
+
+    <script src="Scripts/jquery-1.5.2.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-ui-1.8.16.min.js" type="text/javascript"></script>
+    <script src="Scripts/i18n/grid.locale-en.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.jqGrid.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#grid").jqGrid({
+                url: 'Grid/GetData',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames: ['First Name', 'Last Name', 'Games', 'Hits', 'Doubles', 'Triples', 'HR', 'RBI', 'Salary', 'Team', 'Year'],
+                colModel: [
+                    { name: 'nameFirst', index: 'nameFirst', width: 75, search: true, searchoptions: { sopt: ['eq', 'ne', 'bw', 'bn', 'ew', 'en', 'cn', 'nc']} }, //FirstName
+                    {name: 'nameLast', index: 'nameLast', width: 90, search: true, searchoptions: { sopt: ['eq', 'ne', 'bw', 'bn', 'ew', 'en', 'cn', 'nc']} }, //LastName
+                    {name: 'G', index: 'G', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //Games
+                    {name: 'H', index: 'H', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //Hits
+                    {name: '2B', index: '_2B', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //HRs
+                    {name: '3B', index: '_3B', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //HRs
+                    {name: 'HR', index: 'HR', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //HRs
+                    {name: 'RBI', index: 'RBI', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //RBIs
+                    {name: 'salary', index: 'salary', width: 65, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //salary
+                    {name: 'TeamName', index: 'TeamName', width: 150, search: true, searchoptions: { sopt: ['eq', 'ne', 'bw', 'bn', 'ew', 'en', 'cn', 'nc']} }, //team
+                    {name: 'yearID', index: 'yearID', width: 45, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']}} //year
+                ],
+                pager: '#pager',
+                rowNum: 10,
+                rowList: [10, 20, 30, 40, 50],
+                sortName: 'lastName',
+                sortOrder: 'desc',
+                viewrecords: true,
+                gridview: true,
+                caption: 'basic grid',
+                width: 750,
+                height: 500
+            })
+            .navGrid('#pager', { add: false,
+                view: false,
+                edit: false,
+                del: false,
+                search: true,
+                refresh: true,
+                searchtitle: 'Player Search...'
+            },
+            {}, //edit
+            {}, //add
+            {}, //delete
+            {
+                caption: 'Player Search...',
+                multipleSearch: true,
+                Find: 'Search',
+                Reset: 'Clear'
+            }, //search
+            {}  //view
+            );
+    });
+    </script>
+</body>
+</html>

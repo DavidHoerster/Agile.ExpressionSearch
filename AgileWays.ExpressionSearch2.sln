@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{1AA6FC35-4FB3-4180-AA3D-376C89125602}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileWays.ExpressionSearch2.Repository", "AgileWays.ExpressionSearch2.Repository\AgileWays.ExpressionSearch2.Repository.csproj", "{1A8FE79E-77A2-43CC-B9BE-BBC26F89729D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B93A53D5-DEF3-4073-A626-AD481481EBD7}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AA6FC35-4FB3-4180-AA3D-376C89125602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA6FC35-4FB3-4180-AA3D-376C89125602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA6FC35-4FB3-4180-AA3D-376C89125602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA6FC35-4FB3-4180-AA3D-376C89125602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8FE79E-77A2-43CC-B9BE-BBC26F89729D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8FE79E-77A2-43CC-B9BE-BBC26F89729D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8FE79E-77A2-43CC-B9BE-BBC26F89729D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8FE79E-77A2-43CC-B9BE-BBC26F89729D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
