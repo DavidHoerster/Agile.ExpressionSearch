@@ -1,25 +1,24 @@
 ;(function($){
 /**
  * jqGrid Danish Translation
- * Aesiras A/S
- * http://www.aesiras.dk
+ * Kaare Rasmussen kjs@jasonic.dk
+ * http://jasonic.dk/blog 
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 **/
-$.jgrid = $.jgrid || {};
-$.extend($.jgrid,{
+$.jgrid = {
 	defaults : {
-		recordtext: "Vis {0} - {1} of {2}",
-	    emptyrecords: "Ingen linjer fundet",
-		loadtext: "Henter...",
-		pgtext : "Side {0} af {1}"
+		recordtext: "View {0} - {1} of {2}",
+	    emptyrecords: "No records to view",
+		loadtext: "Loading...",
+		pgtext : "Page {0} of {1}"
 	},
 	search : {
 	    caption: "Søg...",
 	    Find: "Find",
 	    Reset: "Nulstil",
-	    odata: [{ oper:'eq', text:"lig"},{ oper:'ne', text:"forskellige fra"},{ oper:'lt', text:"mindre"},{ oper:'le', text:"mindre eller lig"},{ oper:'gt', text:"større"},{ oper:'ge', text:"større eller lig"},{ oper:'bw', text:"begynder med"},{ oper:'bn', text:"begynder ikke med"},{ oper:'in', text:"findes i"},{ oper:'ni', text:"findes ikke i"},{ oper:'ew', text:"ender med"},{ oper:'en', text:"ender ikke med"},{ oper:'cn', text:"indeholder"},{ oper:'nc', text:"indeholder ikke"},{ oper:'nu', text:'is null'},{ oper:'nn', text:'is not null'}],
+	    odata: [{ oper:'eq', text:'equal'},{ oper:'ne', text:'not equal'},{ oper:'lt', text:'less'},{ oper:'le', text:'less or equal'},{ oper:'gt', text:'greater'},{ oper:'ge', text:'greater or equal'},{ oper:'bw', text:'begins with'},{ oper:'bn', text:'does not begin with'},{ oper:'in', text:'is in'},{ oper:'ni', text:'is not in'},{ oper:'ew', text:'ends with'},{ oper:'en', text:'does not end with'},{ oper:'cn', text:'contains'},{ oper:'nc', text:'does not contain'},{ oper:'nu', text:'is null'},{ oper:'nn', text:'is not null'}],
 	    groupOps: [	{ op: "AND", text: "all" },	{ op: "OR",  text: "any" }	],
 		operandTitle : "Click to select search operation.",
 		resetTitle : "Reset Search Value"
@@ -30,60 +29,60 @@ $.extend($.jgrid,{
 	    bSubmit: "Send",
 	    bCancel: "Annuller",
 		bClose: "Luk",
-		saveData: "Data er ændret. Gem data?",
-		bYes : "Ja",
-		bNo : "Nej",
-		bExit : "Fortryd",
+		saveData: "Data has been changed! Save changes?",
+		bYes : "Yes",
+		bNo : "No",
+		bExit : "Cancel",
 	    msg: {
 	        required:"Felt er nødvendigt",
 	        number:"Indtast venligst et validt tal",
 	        minValue:"værdi skal være større end eller lig med",
 	        maxValue:"værdi skal være mindre end eller lig med",
-	        email: "er ikke en gyldig email",
-	        integer: "Indtast venligst et gyldigt heltal",
-			date: "Indtast venligst en gyldig datoværdi",
-			url: "er ugyldig URL. Prefix mangler ('http://' or 'https://')",
-			nodefined : " er ikke defineret!",
-			novalue : " returværdi kræves!",
+	        email: "er ikke en valid email",
+	        integer: "Indtast venligst et validt heltalt",
+			date: "Indtast venligst en valid datoværdi",
+			url: "is not a valid URL. Prefix required ('http://' or 'https://')",
+			nodefined : " is not defined!",
+			novalue : " return value is required!",
 			customarray : "Custom function should return array!",
 			customfcheck : "Custom function should be present in case of custom checking!"
 		}
 	},
 	view : {
-	    caption: "Vis linje",
-	    bClose: "Luk"
+	    caption: "View Record",
+	    bClose: "Close"
 	},
 	del : {
 	    caption: "Slet",
-	    msg: "Slet valgte linje(r)?",
+	    msg: "Slet valgte række(r)?",
 	    bSubmit: "Slet",
-	    bCancel: "Fortryd"
+	    bCancel: "Annuller"
 	},
 	nav : {
 		edittext: " ",
-	    edittitle: "Rediger valgte linje",
+	    edittitle: "Rediger valgte række",
 		addtext:" ",
-	    addtitle: "Tilføj ny linje",
+	    addtitle: "Tilføj ny række",
 	    deltext: " ",
-	    deltitle: "Slet valgte linje",
+	    deltitle: "Slet valgte række",
 	    searchtext: " ",
-	    searchtitle: "Find linjer",
+	    searchtitle: "Find poster",
 	    refreshtext: "",
 	    refreshtitle: "Indlæs igen",
 	    alertcap: "Advarsel",
-	    alerttext: "Vælg venligst linje",
+	    alerttext: "Vælg venligst række",
 		viewtext: "",
-		viewtitle: "Vis valgte linje"
+		viewtitle: "View selected row"
 	},
 	col : {
 	    caption: "Vis/skjul kolonner",
-	    bSubmit: "Opdatere",
-	    bCancel: "Fortryd"
+	    bSubmit: "Send",
+	    bCancel: "Annuller"
 	},
 	errors : {
 		errcap : "Fejl",
-		nourl : "Ingen url valgt",
-		norecords: "Ingen linjer at behandle",
+		nourl : "Ingel url valgt",
+		norecords: "Ingen poster at behandle",
 	    model : "colNames og colModel har ikke samme længde!"
 	},
 	formatter : {
@@ -92,7 +91,7 @@ $.extend($.jgrid,{
 		currency : {decimalSeparator:",", thousandsSeparator: " ", decimalPlaces: 2, prefix: "", suffix:"", defaultValue: '0,00'},
 		date : {
 			dayNames:   [
-				"Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør",
+				"Søn", "Man", "Tirs", "Ons", "Tors", "Fre", "Lør",
 				"Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"
 			],
 			monthNames: [
@@ -125,6 +124,6 @@ $.extend($.jgrid,{
 	    checkbox : {disabled:true},
 		idName : 'id'
 	}
-});
-// DA
+};
+// DK
 })(jQuery);

@@ -1,6 +1,6 @@
 ;(function($){
 /**
- * jqGrid Montenegrian Translation
+ * jqGrid Serbian latin Translation
  * Bild Studio info@bild-studio.net
  * http://www.bild-studio.com
  * Dual licensed under the MIT and GPL licenses:
@@ -12,7 +12,7 @@ $.extend($.jgrid,{
 	defaults : {
 		recordtext: "Pregled {0} - {1} od {2}",
 		emptyrecords: "Ne postoji nijedan zapis",
-		loadtext: "Učitivanje...",
+		loadtext: "Učitavanje…",
 		pgtext : "Strana {0} od {1}"
 	},
 	search : {
@@ -26,27 +26,27 @@ $.extend($.jgrid,{
 	},
 	edit : {
 		addCaption: "Dodaj zapis",
-		editCaption: "Izmjeni zapis",
+		editCaption: "Izmeni zapis",
 		bSubmit: "Pošalji",
 		bCancel: "Odustani",
 		bClose: "Zatvori",
-		saveData: "Podatak je izmjenjen! Sačuvaj izmjene?",
+		saveData: "Podatak je izmenjen! Sačuvaj izmene?",
 		bYes : "Da",
 		bNo : "Ne",
 		bExit : "Odustani",
 		msg: {
-			required:"Polje je obavezno",
-			number:"Unesite ispravan broj",
-			minValue:"vrijednost mora biti veća od ili jednaka sa ",
-			maxValue:"vrijednost mora biti manja ili jednaka sa",
-			email: "nije ispravna email adresa, nije valjda da ne umiješ ukucati mail!?",
-			integer: "Ne zajebaji se unesi cjelobrojnu vrijednost ",
+			required: "Polje je obavezno",
+			number: "Unesite ispravan broj",
+			minValue: "vrednost mora biti veća od ili jednaka sa ",
+			maxValue: "vrednost mora biti manja ili jednaka sa",
+			email: "nije ispravna email adresa, nije valjda da ne umeš ukucati mail!?",
+			integer: "Unesi celobrojnu vrednost ",
 			date: "Unesite ispravan datum",
 			url: "nije ispravan URL. Potreban je prefiks ('http://' or 'https://')",
 			nodefined : " nije definisan!",
-			novalue : " zahtjevana je povratna vrijednost!",
+			novalue : " zahtevana je povratna vrednost!",
 			customarray : "Prilagođena funkcija treba da vrati niz!",
-			customfcheck : "Prilagođena funkcija treba da bude prisutana u slučaju prilagođene provjere!"
+			customfcheck : "Prilagođena funkcija treba da bude prisutana u slučaju prilagođene provere!"
 			
 		}
 	},
@@ -62,7 +62,7 @@ $.extend($.jgrid,{
 	},
 	nav : {
 		edittext: "",
-		edittitle: "Izmjeni izabrani red",
+		edittitle: "Izmeni izabrani red",
 		addtext:"",
 		addtitle: "Dodaj novi red",
 		deltext: "",
