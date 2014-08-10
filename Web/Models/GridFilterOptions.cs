@@ -21,7 +21,7 @@ namespace Web.Models
         [DataMember(Name="field")]
         public string Field { get; set; }
         [DataMember(Name="op")]
-        public GridSearchOperation Operation { get; set; }
+        public String Operation { get; set; }
         [DataMember(Name="data")]
         public string FieldData { get; set; }
     }

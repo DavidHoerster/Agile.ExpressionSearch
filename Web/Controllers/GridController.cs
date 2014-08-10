@@ -12,16 +12,34 @@ using AgileWays.ExpressionSearch2.Repository;
 using AgileWays.ExpressionSearch2.Repository.Entity;
 using Web.Common;
 using LinqKit;
+using AgileWays.ExpressionSearch.Service;
 
 namespace Web.Controllers
 {
     public class GridController : ApiController
     {
         string _connectionString, _dbName;
+        IOpConfig _config;
+        ExpressionOpFactory _factory;
         public GridController()
         {
             _connectionString = "mongodb://localhost:27020";
             _dbName = "Baseball2013";
+
+            _config = new OpConfig()
+                        .Add("eq", ExpressionType.Equal)
+                        .Add("ne", ExpressionType.NotEqual)
+                        .Add("gt", ExpressionType.GreaterThan)
+                        .Add("ge", ExpressionType.GreaterThanOrEqual)
+                        .Add("lt", ExpressionType.LessThan)
+                        .Add("le", ExpressionType.LessThanOrEqual)
+                        .Add("bw", ExpressionType.IsTrue)
+                        .Add("bn", ExpressionType.IsFalse)
+                        .Add("ew", ExpressionType.IsTrue)
+                        .Add("en", ExpressionType.IsFalse)
+                        .Add("cn", ExpressionType.IsTrue)
+                        .Add("nc", ExpressionType.IsFalse);
+            _factory = new ExpressionOpFactory(_config);
         }
 
         [Web.Common.GridDataFilter]
@@ -49,12 +67,12 @@ namespace Web.Controllers
                 IEnumerable<ExtendedBatter> results;
                 if (options.IsSearch)
                 {
-                    if (options.Filters.FilterRules[0].Operation == GridSearchOperation.EQ)
+                    if (options.Filters.FilterRules[0].Operation.Equals("EQ"))
                     {
                         results = ctx.SelectAll<ExtendedBatter>()
                                     .Where(b => b.HomeRuns == Convert.ToInt32(options.Filters.FilterRules[0].FieldData));
                     }
-                    else if (options.Filters.FilterRules[0].Operation == GridSearchOperation.NE)
+                    else if (options.Filters.FilterRules[0].Operation.Equals("NE"))
                     {
                         results = ctx.SelectAll<ExtendedBatter>()
                                     .Where(b => b.HomeRuns != Convert.ToInt32(options.Filters.FilterRules[0].FieldData))
@@ -90,7 +108,7 @@ namespace Web.Controllers
 
                 if (options.IsSearch)
                 {
-                    predicate = SearchHelper.CreateSearchPredicate(options);
+                    predicate = SearchHelper.CreateSearchPredicate<ExtendedBatter>(_factory, options);
                 }
                 else
                 {
@@ -99,8 +117,21 @@ namespace Web.Controllers
 
                 results = ctx.SelectAll<ExtendedBatter>()
                                 .AsExpandable()     //special thing for EF and Mongo
-                                .Where(predicate)
-                                .Take(500);
+                                .Where(predicate);
+
+                if (!String.IsNullOrWhiteSpace(options.SortIndex))
+                {
+                    if (options.SortOrder.Equals("asc", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        results = results.AsQueryable().OrderBy(SearchHelper.GetOrderByClause<ExtendedBatter, Int32>(options.SortIndex));
+                    }
+                    else
+                    {
+                        results = results.AsQueryable().OrderByDescending(SearchHelper.GetOrderByClause<ExtendedBatter, Int32>(options.SortIndex));
+                    }
+                }
+
+                results = results.Take(500);
 
                 return CreateJSONStringForGridData(options, skipValue, results);
             }

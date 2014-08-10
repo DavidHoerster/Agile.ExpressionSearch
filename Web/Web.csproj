@@ -229,6 +229,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AgileWays.ExpressionSearch.Service\AgileWays.ExpressionSearch.Service.csproj">
+      <Project>{915a8802-73cf-454d-8570-16987840067c}</Project>
+      <Name>AgileWays.ExpressionSearch.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AgileWays.ExpressionSearch2.Repository\AgileWays.ExpressionSearch2.Repository.csproj">
       <Project>{1a8fe79e-77a2-43cc-b9be-bbc26f89729d}</Project>
       <Name>AgileWays.ExpressionSearch2.Repository</Name>
