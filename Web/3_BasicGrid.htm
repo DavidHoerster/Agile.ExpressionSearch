@@ -23,11 +23,11 @@
                 mtype: 'GET',
                 colNames: ['First Name', 'Last Name', 'Games', 'Hits', 'Doubles', 'Triples', 'HR', 'RBI', 'Salary', 'Team', 'Year'],
                 colModel: [
-                    { name: 'nameFirst', index: 'FirstName', width: 75, search: true, searchoptions: { sopt: ['eq', 'ne', 'bw', 'bn', 'ew', 'en', 'cn', 'nc']} }, //FirstName
-                    {name: 'nameLast', index: 'LastName', width: 90, search: true, searchoptions: { sopt: ['eq', 'ne', 'bw', 'bn', 'ew', 'en', 'cn', 'nc']} }, //LastName
-                    {name: 'G', index: 'Games', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //Games
-                    {name: 'H', index: 'Hits', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //Hits
-                    {name: '2B', index: 'Doubles', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le']} }, //HRs
+                    { name: 'FirstName', index: 'FirstName', width: 75, search: true, searchoptions: { sopt: ['eq', 'ne', 'bw', 'bn', 'ew', 'en', 'cn', 'nc']} }, //FirstName
+                    { name: 'LastName', index: 'LastName', width: 90, search: true, searchoptions: { sopt: ['eq', 'ne', 'bw', 'bn', 'ew', 'en', 'cn', 'nc'] } }, //LastName
+                    { name: 'Games', index: 'Games', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le'] } }, //Games
+                    { name: 'Hits', index: 'Hits', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le'] } }, //Hits
+                    { name: 'Double', index: 'Doubles', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le'] } }, //HRs
                     { name: 'Triples', index: 'Triples', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le'] } }, //HRs
                     { name: 'HomeRuns', index: 'HomeRuns', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le'] } }, //HRs
                     { name: 'RunsBattedIn', index: 'RunsBattedIn', width: 40, search: true, searchoptions: { sopt: ['eq', 'ne', 'gt', 'ge', 'lt', 'le'] } }, //RBIs
