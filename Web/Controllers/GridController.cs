@@ -27,18 +27,18 @@ namespace Web.Controllers
             _dbName = "Baseball2013";
 
             _config = new OpConfig()
-                        .Add("eq", ExpressionType.Equal)
-                        .Add("ne", ExpressionType.NotEqual)
-                        .Add("gt", ExpressionType.GreaterThan)
-                        .Add("ge", ExpressionType.GreaterThanOrEqual)
-                        .Add("lt", ExpressionType.LessThan)
-                        .Add("le", ExpressionType.LessThanOrEqual)
-                        .Add("bw", ExpressionType.IsTrue)
-                        .Add("bn", ExpressionType.IsFalse)
-                        .Add("ew", ExpressionType.IsTrue)
-                        .Add("en", ExpressionType.IsFalse)
-                        .Add("cn", ExpressionType.IsTrue)
-                        .Add("nc", ExpressionType.IsFalse);
+                        .Add("eq", new ExpressionBehavior { IsBinary = true, ExpressionType = ExpressionType.Equal })
+                        .Add("ne", new ExpressionBehavior { IsBinary = true, ExpressionType = ExpressionType.NotEqual })
+                        .Add("gt", new ExpressionBehavior { IsBinary = true, ExpressionType = ExpressionType.GreaterThan })
+                        .Add("ge", new ExpressionBehavior { IsBinary = true, ExpressionType = ExpressionType.GreaterThanOrEqual })
+                        .Add("lt", new ExpressionBehavior { IsBinary = true, ExpressionType = ExpressionType.LessThan })
+                        .Add("le", new ExpressionBehavior { IsBinary = true, ExpressionType = ExpressionType.LessThanOrEqual })
+                        .Add("bw", new ExpressionBehavior { IsBinary = false, MethodResultCompareValue = true, ExpressionType = ExpressionType.Equal, UseMethod = true, Method = "StartsWith" })
+                        .Add("bn", new ExpressionBehavior { IsBinary = false, MethodResultCompareValue = false, ExpressionType = ExpressionType.Equal, UseMethod = true, Method = "StartsWith" })
+                        .Add("ew", new ExpressionBehavior { IsBinary = false, MethodResultCompareValue = true, ExpressionType = ExpressionType.Equal, UseMethod = true, Method = "EndsWith" })
+                        .Add("en", new ExpressionBehavior { IsBinary = false, MethodResultCompareValue = false, ExpressionType = ExpressionType.Equal, UseMethod = true, Method = "EndsWith" })
+                        .Add("cn", new ExpressionBehavior { IsBinary = false, MethodResultCompareValue = true, ExpressionType = ExpressionType.Equal, UseMethod = true, Method = "Contains" })
+                        .Add("nc", new ExpressionBehavior { IsBinary = false, MethodResultCompareValue = false, ExpressionType = ExpressionType.Equal, UseMethod = true, Method = "Contains" });
             _factory = new ExpressionOpFactory(_config);
         }
 
@@ -67,12 +67,12 @@ namespace Web.Controllers
                 IEnumerable<ExtendedBatter> results;
                 if (options.IsSearch)
                 {
-                    if (options.Filters.FilterRules[0].Operation.Equals("EQ"))
+                    if (options.Filters.FilterRules[0].Operation.Equals("eq"))
                     {
                         results = ctx.SelectAll<ExtendedBatter>()
                                     .Where(b => b.HomeRuns == Convert.ToInt32(options.Filters.FilterRules[0].FieldData));
                     }
-                    else if (options.Filters.FilterRules[0].Operation.Equals("NE"))
+                    else if (options.Filters.FilterRules[0].Operation.Equals("ne"))
                     {
                         results = ctx.SelectAll<ExtendedBatter>()
                                     .Where(b => b.HomeRuns != Convert.ToInt32(options.Filters.FilterRules[0].FieldData))

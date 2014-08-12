@@ -8,6 +8,7 @@ using LinqKit;
 using System.Reflection;
 using AgileWays.ExpressionSearch2.Repository.Entity;
 using AgileWays.ExpressionSearch.Service;
+using System.Runtime.CompilerServices;
 
 namespace Web.Common
 {
@@ -25,29 +26,27 @@ namespace Web.Common
             foreach (var rule in options.Filters.FilterRules)
             {
                 var operationAttribute = factory.GetExpressionType(rule.Operation);
-                //var operationAttribute = ExtractOperationComparisonType(rule.Operation);
 
                 PropertyInfo pi = typeof(T).GetProperty(rule.Field);
                 ParameterExpression lhsParam = Expression.Parameter(typeof(T));
                 Expression lhs = Expression.Property(lhsParam, pi);
                 Expression rhs = Expression.Constant(Convert.ChangeType(rule.FieldData, pi.PropertyType));
 
-                //TODO: Not handling strings at the moment!!
-                //if (pi.PropertyType.Name == "String")
-                //{
-                //    ModifyExpressionParametersForStringFunctions(operationAttribute, ref lhs, ref rhs);
-                //}
 
                 Expression theOperation;
-                //TODO: need to account for binary/unary operations here!
-                //if (operationAttribute.IsBinary)
-                //{
-                    theOperation = Expression.MakeBinary(operationAttribute, lhs, rhs);
-                //}
-                //else
-                //{
-                //    theOperation = Expression.MakeUnary(operationAttribute.NodeType, lhs, null);
-                //}
+                if (operationAttribute.UseMethod)
+                {
+                    lhs = Expression.Call(lhs, operationAttribute.Method, null, rhs);
+                }
+                
+                if (operationAttribute.IsBinary)
+                {
+                    theOperation = Expression.MakeBinary(operationAttribute.ExpressionType, lhs, rhs);
+                }
+                else  //TODO: need to fix this
+                {
+                    theOperation = Expression.MakeBinary(operationAttribute.ExpressionType, lhs, Expression.Constant(operationAttribute.MethodResultCompareValue));
+                }
 
                 var theLambda = Expression.Lambda<Func<T, bool>>(theOperation, lhsParam);
 
@@ -64,7 +63,6 @@ namespace Web.Common
             return predicate;
         }
 
-
         private static GridSearchOperationNodeTypeAttribute ExtractOperationComparisonType(GridSearchOperation op)
         {
             //get the attribute and associated NodeType
@@ -74,26 +72,11 @@ namespace Web.Common
             return theAttribute;
         }
 
-
         public static Type GetPropertyTypeOfPropertyName<T>(string propertyName)
         {
             PropertyInfo pi = typeof(T).GetProperty(propertyName);
             return pi.PropertyType;
         }
-
-        //private static void ModifyExpressionParametersForStringFunctions(GridSearchOperationNodeTypeAttribute operationAttribute, ref Expression lhs, ref Expression rhs)
-        //{
-        //    if (!String.IsNullOrWhiteSpace(operationAttribute.StringManipulationMethod))
-        //    {
-        //        lhs = Expression.Call(lhs, operationAttribute.StringManipulationMethod, null);
-        //        rhs = Expression.Call(rhs, operationAttribute.StringManipulationMethod, null);
-        //    }
-
-        //    if (!String.IsNullOrWhiteSpace(operationAttribute.StringComparisonMethod))
-        //    {
-        //        lhs = Expression.Call(lhs, operationAttribute.StringComparisonMethod, null, rhs);
-        //    }
-        //}
 
         public static Expression<Func<TObjectType, TTargetType>> GetOrderByClause<TObjectType, TTargetType>(string propertyName)
         {
@@ -104,7 +87,5 @@ namespace Web.Common
             var orderByLambda = Expression.Lambda<Func<TObjectType, TTargetType>>(orderBy, lhsParam);
             return orderByLambda;
         }
-
-
     }
 }

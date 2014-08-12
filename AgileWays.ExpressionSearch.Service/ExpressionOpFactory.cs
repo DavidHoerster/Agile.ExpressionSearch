@@ -15,7 +15,7 @@ namespace AgileWays.ExpressionSearch.Service
             _config = config;
         }
 
-        public ExpressionType GetExpressionType(String value)
+        public ExpressionBehavior GetExpressionType(String value)
         {
             return _config[value];
         }

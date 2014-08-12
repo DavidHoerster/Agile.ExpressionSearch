@@ -2,31 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AgileWays.ExpressionSearch.Service
 {
+    public class ExpressionBehavior
+    {
+        public ExpressionType ExpressionType { get; set; }
+        public Boolean IsBinary { get; set; }
+        public Boolean UseMethod { get; set; }
+        public String Method { get; set; }
+        public Boolean MethodResultCompareValue { get; set; }
+    }
     public interface IOpConfig
     {
-        IOpConfig Add(String value, ExpressionType expressionType);
-        ExpressionType this[String exprName] { get; }
+        IOpConfig Add(String value, ExpressionBehavior expressionType);
+        ExpressionBehavior this[String exprName] { get; }
     }
     public class OpConfig : IOpConfig
     {
-        private Dictionary<String, ExpressionType> _expressionTypeMap;
+        private Dictionary<String, ExpressionBehavior> _expressionTypeMap;
 
         public OpConfig()
         {
-            _expressionTypeMap = new Dictionary<string, ExpressionType>();
+            _expressionTypeMap = new Dictionary<string, ExpressionBehavior>();
         }
-        public IOpConfig Add(string value, ExpressionType expressionType)
+        public IOpConfig Add(string value, ExpressionBehavior expressionType)
         {
             _expressionTypeMap.Add(value, expressionType);
             return this;
         }
 
-        public ExpressionType this[String exprName]
+        public ExpressionBehavior this[String exprName]
         {
             get
             {
@@ -36,7 +45,7 @@ namespace AgileWays.ExpressionSearch.Service
                 }
                 else
                 {
-                    return ExpressionType.Equal;
+                    return null;
                 }
             }
         }
